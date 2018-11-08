@@ -16,120 +16,92 @@ const logger = winston.createLogger({
     exitOnError: false,
 });
 
+const utils = require('./utils');
+
 const SKILL_ID = 'amzn1.ask.skill.279fec18-3b4b-4d66-a3d2-d53680b6696a';
 const ER_SUCCESS_MATCH = 'ER_SUCCESS_MATCH';
 const ER_SUCCESS_NO_MATCH = 'ER_SUCCESS_NO_MATCH';
-const COPYRIGHT = 'Quelle: Deutscher Wetterdienst';
 
 const languageStrings = {
     de: {
         translation: {
-            HELP_MESSAGE: 'Ich kann dir die Bilder von den DWD-Wetterkameras in Hamburg, Hohenpeißenberg, Offenbach, Schmücke und Warnemünde zeigen. Welche Kamera soll ich anzeigen?',
-            HELP_REPROMPT: 'Welche DWD-Wetterkamera soll ich anzeigen, Hamburg, Hohenpeißenberg, Offenbach, Schmücke oder Warnemünde?',
+            HELP_MESSAGE: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden. Welche Stimme soll ich benutzen?',
+            HELP_REPROMPT: 'Welche Stimme soll ich benutzen: Ivy, Joanna, Kendra, Kimberly, Salli, Joey, Justin, Matthew, Nicole, Russell, Amy, Emma, Brian, Aditi, Raveena, Marlene, Vicki, Hans, Conchita, Enrique, Carla, Giorgio, Mizuki, Takumi, Celine, Lea oder Mathieu?',
             STOP_MESSAGE: '<say-as interpret-as="interjection">bis dann</say-as>.',
-            UNKNOWN_WEBCAM: 'Ich kenne diese Kamera leider nicht.',
+            UNKNOWN_VOICENAME: 'Ich kenne diese Stimme leider nicht.',
             NOT_UNDERSTOOD_MESSAGE: 'Entschuldigung, das verstehe ich nicht. Bitte wiederhole das?',
         },
     },
 };
 
-const WeatherCamIntentHandler = {
+const VoiceNameIntentHandler = {
     canHandle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
         return request.type === 'LaunchRequest'
-            || (request.type === 'IntentRequest' && request.intent.name === 'WeatherCamIntent');
+            || (request.type === 'IntentRequest' && request.intent.name === 'VoiceNameIntent');
     },
     handle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
         logger.debug('request', request);
-
-        // delegate to Alexa to collect all the required slots
-        /*
-        if (request.dialogState && request.dialogState !== 'COMPLETED') {
-            logger.debug('dialog state is ' + request.dialogState + ' => adding delegate directive');
-            return handlerInput.responseBuilder
-                .addDelegateDirective()
-                .getResponse();
-        }*/
 
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const slots = request.intent && request.intent.slots;
         if (!slots) {
             return handlerInput.responseBuilder
-                .speak('Welche Kamera soll ich anzeigen?')
+                .speak('Welche Stimme soll ich benutzen?')
                 .reprompt(requestAttributes.t('HELP_REPROMPT'))
                 .getResponse();
         }
-        logger.debug('webcam slot', slots.webcam);
+        logger.debug('voicename slot', slots.voicename);
 
-        const rpa = slots.webcam
-            && slots.webcam.resolutions
-            && slots.webcam.resolutions.resolutionsPerAuthority[0];
+        const rpa = slots.voicename
+            && slots.voicename.resolutions
+            && slots.voicename.resolutions.resolutionsPerAuthority[0];
         switch (rpa.status.code) {
-            case ER_SUCCESS_NO_MATCH:
-                // should never happen, as unmatched cities should go to UnsupportedCityIntentHandler
-                logger.error('no match for webcam ' + slots.webcam.value);
+        case ER_SUCCESS_NO_MATCH:
+            // should never happen, as unmatched first names should go to UnsupportedFirstNameIntentHandler
+            logger.error('no match for voicename ' + slots.voicename.value);
+            return handlerInput.responseBuilder
+                .speak(requestAttributes.t('UNKNOWN_VOICENAME'))
+                .getResponse();
+
+        case ER_SUCCESS_MATCH:
+            if (rpa.values.length > 1) {
+                logger.info('multiple matches for ' + slots.voicename.value);
+                var prompt = 'Welche Stimme';
+                const size = rpa.values.length;
+
+                rpa.values.forEach((element, index) => {
+                    prompt += ((index === size - 1) ? ' oder ' : ', ') + element.value.name;
+                });
+
+                prompt += '?';
+                logger.info('eliciting voicename slot: ' + prompt);
                 return handlerInput.responseBuilder
-                    .speak(requestAttributes.t('UNKNOWN_WEBCAM'))
+                    .speak(prompt)
+                    .reprompt(prompt)
+                    .addElicitSlotDirective(slots.voicename.name)
                     .getResponse();
+            }
+            break;
 
-            case ER_SUCCESS_MATCH:
-                if (rpa.values.length > 1) {
-                    logger.info('multiple matches for ' + slots.webcam.value);
-                    var prompt = 'Welche Kamera';
-                    const size = rpa.values.length;
-
-                    rpa.values.forEach((element, index) => {
-                        prompt += ((index === size - 1) ? ' oder ' : ', ') + element.value.name;
-                    });
-
-                    prompt += '?';
-                    logger.info('eliciting webcam slot: ' + prompt);
-                    return handlerInput.responseBuilder
-                        .speak(prompt)
-                        .reprompt(prompt)
-                        .addElicitSlotDirective(slots.webcam.name)
-                        .getResponse();
-                }
-                break;
-
-            default:
-                logger.error('unexpected status code ' + rpa.status.code);
+        default:
+            logger.error('unexpected status code ' + rpa.status.code);
         }
 
         const value = rpa.values[0].value;
-        logger.info('webcam value', value);
-
-        const baseUrl = 'https://opendata.dwd.de/weather/webcam/' + value.id + '/' + value.id + '_latest_';
-        if (supportsDisplay(handlerInput)) {
-            const webcamImage = new Alexa.ImageHelper()
-                .withDescription(COPYRIGHT)
-                .addImageInstance(baseUrl + '400.jpg', 'X_SMALL', 400, 225)
-                .addImageInstance(baseUrl + '640.jpg', 'SMALL', 640, 360)
-                .addImageInstance(baseUrl + '816.jpg', 'MEDIUM', 816, 459)
-                // .addImageInstance(baseUrl + '1200.jpg', 'LARGE', 1200, 675)
-                // .addImageInstance(baseUrl + '1920.jpg', 'X_LARGE', 1920, 1080)
-                .getImage();
-            handlerInput.responseBuilder
-                .addRenderTemplateDirective({
-                    type: 'BodyTemplate7',
-                    backButton: 'HIDDEN',
-                    image: webcamImage,
-                    title: value.name,
-                });
-        }
+        logger.info('voicename value', value);
 
         return handlerInput.responseBuilder
-            .speak('Hier ist die Kamera ' + value.name + '.')
-            .withStandardCard(value.name, COPYRIGHT, baseUrl + '114.jpg', baseUrl + '180.jpg')
+            .speak('Hier ist die Stimme ' + value.name + ': ' + utils.getSpeechOutputFor(value.name))
             .getResponse();
     },
 };
 
-const UnsupportedCityIntentHandler = {
+const UnsupportedFirstNameIntentHandler = {
     canHandle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
-        return request.type === 'IntentRequest' && request.intent.name === 'UnsupportedCityIntent';
+        return request.type === 'IntentRequest' && request.intent.name === 'UnsupportedFirstNameIntent';
     },
     handle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
@@ -137,7 +109,7 @@ const UnsupportedCityIntentHandler = {
 
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         return handlerInput.responseBuilder
-            .speak(requestAttributes.t('UNKNOWN_WEBCAM'))
+            .speak(requestAttributes.t('UNKNOWN_VOICENAME'))
             .getResponse();
     },
 };
@@ -230,8 +202,8 @@ const LocalizationInterceptor = {
 
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
-        WeatherCamIntentHandler,
-        UnsupportedCityIntentHandler,
+        VoiceNameIntentHandler,
+        UnsupportedFirstNameIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler)

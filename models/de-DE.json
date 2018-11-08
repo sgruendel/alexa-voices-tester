@@ -1,0 +1,199 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "stimmentester",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "VoiceNameIntent",
+          "slots": [
+            {
+              "name": "voicename",
+              "type": "LIST_OF_VOICES"
+            }
+          ],
+          "samples": [
+            "{voicename}",
+            "sprich als {voicename}",
+            "sprich wie {voicename}",
+            "rede als {voicename}",
+            "rede wie {voicename}"
+          ]
+        },
+        {
+          "name": "UnsupportedFirstNameIntent",
+          "slots": [
+            {
+              "name": "firstname",
+              "type": "AMAZON.DE_FIRST_NAME"
+            }
+          ],
+          "samples": [
+            "{firstname}",
+            "sprich als {firstname}",
+            "sprich wie {firstname}",
+            "rede als {firstname}",
+            "rede wie {firstname}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "LIST_OF_VOICES",
+          "values": [
+            {
+              "name": {
+                "value": "Joey"
+              }
+            },
+            {
+              "name": {
+                "value": "Justin"
+              }
+            },
+            {
+              "name": {
+                "value": "Matthew"
+              }
+            },
+            {
+              "name": {
+                "value": "Russell"
+              }
+            },
+            {
+              "name": {
+                "value": "Brian"
+              }
+            },
+            {
+              "name": {
+                "value": "Hans"
+              }
+            },
+            {
+              "name": {
+                "value": "Enrique"
+              }
+            },
+            {
+              "name": {
+                "value": "Giorgio"
+              }
+            },
+            {
+              "name": {
+                "value": "Takumi"
+              }
+            },
+            {
+              "name": {
+                "value": "Mathieu"
+              }
+            },
+            {
+              "name": {
+                "value": "Ivy"
+              }
+            },
+            {
+              "name": {
+                "value": "Joanna"
+              }
+            },
+            {
+              "name": {
+                "value": "Kendra"
+              }
+            },
+            {
+              "name": {
+                "value": "Kimberly"
+              }
+            },
+            {
+              "name": {
+                "value": "Salli"
+              }
+            },
+            {
+              "name": {
+                "value": "Nicole"
+              }
+            },
+            {
+              "name": {
+                "value": "Amy"
+              }
+            },
+            {
+              "name": {
+                "value": "Emma"
+              }
+            },
+            {
+              "name": {
+                "value": "Aditi"
+              }
+            },
+            {
+              "name": {
+                "value": "Raveena"
+              }
+            },
+            {
+              "name": {
+                "value": "Marlene"
+              }
+            },
+            {
+              "name": {
+                "value": "Vicki"
+              }
+            },
+            {
+              "name": {
+                "value": "Conchita"
+              }
+            },
+            {
+              "name": {
+                "value": "Carla"
+              }
+            },
+            {
+              "name": {
+                "value": "Mizuki"
+              }
+            },
+            {
+              "name": {
+                "value": "Celine"
+              }
+            },
+            {
+              "name": {
+                "value": "Lea"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
