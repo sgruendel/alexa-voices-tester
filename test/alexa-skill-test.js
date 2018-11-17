@@ -94,14 +94,4 @@ describe('Stimmentester Skill', () => {
             },
         ]);
     });
-
-    describe('UnsupportedFirstNameIntent', () => {
-        alexaTest.test([
-            {
-                request: alexaTest.getIntentRequest('UnsupportedFirstNameIntent', { firstname: 'otto' }),
-                says: 'Ich kenne diese Stimme leider nicht.',
-                repromptsNothing: true, shouldEndSession: true,
-            },
-        ]);
-    });
 });

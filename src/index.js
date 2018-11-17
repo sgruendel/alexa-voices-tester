@@ -59,7 +59,7 @@ const VoiceNameIntentHandler = {
             && slots.voicename.resolutions.resolutionsPerAuthority[0];
         switch (rpa.status.code) {
         case ER_SUCCESS_NO_MATCH:
-            // should never happen, as unmatched first names should go to UnsupportedFirstNameIntentHandler
+            // should never happen, as Slot Validation will only allow matches
             logger.error('no match for voicename ' + slots.voicename.value);
             return handlerInput.responseBuilder
                 .speak(requestAttributes.t('UNKNOWN_VOICENAME'))
@@ -94,22 +94,6 @@ const VoiceNameIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak('Hier ist die Stimme ' + value.name + ': ' + utils.getSpeechOutputFor(value.name))
-            .getResponse();
-    },
-};
-
-const UnsupportedFirstNameIntentHandler = {
-    canHandle(handlerInput) {
-        const { request } = handlerInput.requestEnvelope;
-        return request.type === 'IntentRequest' && request.intent.name === 'UnsupportedFirstNameIntent';
-    },
-    handle(handlerInput) {
-        const { request } = handlerInput.requestEnvelope;
-        logger.debug('request', request);
-
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        return handlerInput.responseBuilder
-            .speak(requestAttributes.t('UNKNOWN_VOICENAME'))
             .getResponse();
     },
 };
@@ -160,7 +144,7 @@ const SessionEndedRequestHandler = {
                 logger.error(request.error.type + ': ' + request.error.message);
             }
         } catch (err) {
-            logger.error(err, request);
+            logger.error(err.stack || err.toString(), request);
         }
 
         logger.debug('session ended', request);
@@ -173,8 +157,9 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        logger.error(error.message,
-            { request: handlerInput.requestEnvelope.request, stack: error.stack, error: error });
+        const { request } = handlerInput.requestEnvelope;
+        logger.error(error.stack || error.toString(), request);
+
         const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
         const speechOutput = requestAttributes.t('NOT_UNDERSTOOD_MESSAGE');
         return handlerInput.responseBuilder
@@ -203,7 +188,6 @@ const LocalizationInterceptor = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         VoiceNameIntentHandler,
-        UnsupportedFirstNameIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler)

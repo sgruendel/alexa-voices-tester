@@ -24,31 +24,22 @@
           "slots": [
             {
               "name": "voicename",
-              "type": "LIST_OF_VOICES"
+              "type": "LIST_OF_VOICES",
+              "samples": [
+                "{voicename}",
+                "als {voicename}",
+                "für {voicename}"
+              ]
             }
           ],
           "samples": [
             "{voicename}",
+            "als {voicename}",
+            "für {voicename}",
             "sprich als {voicename}",
             "sprich wie {voicename}",
             "rede als {voicename}",
             "rede wie {voicename}"
-          ]
-        },
-        {
-          "name": "UnsupportedFirstNameIntent",
-          "slots": [
-            {
-              "name": "firstname",
-              "type": "AMAZON.DE_FIRST_NAME"
-            }
-          ],
-          "samples": [
-            "{firstname}",
-            "sprich als {firstname}",
-            "sprich wie {firstname}",
-            "rede als {firstname}",
-            "rede wie {firstname}"
           ]
         }
       ],
@@ -194,6 +185,52 @@
           ]
         }
       ]
-    }
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "VoiceNameIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "voicename",
+              "type": "LIST_OF_VOICES",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.voicename"
+              },
+              "validations": [
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.voicename"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.voicename",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Welche Stimme?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.voicename",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Ich kenne diese Stimme leider nicht. Welche Stimme soll ich verwenden?"
+          }
+        ]
+      }
+    ]
   }
 }
