@@ -67,9 +67,9 @@ exports.getSpeechOutputFor = (voiceName) => {
                 } else if (lang.startsWith('es')) {
                     iAm = 'Hablo español y mi nombre es';
                 } else if (lang.startsWith('it')) {
-                    iAm = 'Parlo francese e mi chiamo';
+                    iAm = 'Parlo italiano e mi chiamo';
                 } else if (lang.startsWith('ja')) {
-                    iAm = '私はフランス語を話し、私の名前は';
+                    iAm = '私は日本語を話し、私の名前は';
                 } else if (lang.startsWith('fr')) {
                     iAm = "Je parle français et je m'appelle";
                 } else {
