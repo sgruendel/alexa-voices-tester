@@ -6,8 +6,8 @@
           "summary": "Alexa redet mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen",
           "examplePhrases": [
             "Alexa, öffne Stimmentester",
-            "Alexa, öffne Stimmentester und sprich als Marlene",
-            "Alexa, öffne Stimmentester und rede wie Hans"
+            "Alexa, öffne Stimmentester und sprich als Italiener",
+            "Alexa, öffne Stimmentester und rede wie eine Französin"
           ],
           "keywords": [
             "polly",
@@ -17,7 +17,7 @@
           ],
           "name": "Stimmentester",
           "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/6409/e6ad9c311a9c4cc9ba69034352a3ecd7/APP_ICON?versionId=T1dJKKJo2xe1.b.IBEKUwIMnsH5OCuBw&AWSAccessKeyId=AKIAJFEYRBGIHK2BBYKA&Expires=1541766839&Signature=3ri6%2BYtyfoEHXfaJglSIPeD4pMo%3D",
-          "description": "Lass' Alexa mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden, Aufruf über\n\"Alexa, öffne Stimmentester und sprich als Marlene\"\n\nEs werden alle Amazon Polly Stimmen unterstützt, die Alexa anbietet: Ivy, Joanna, Kendra, Kimberly, Salli, Joey, Justin, Matthew, Nicole, Russell, Amy, Emma, Brian, Aditi, Raveena, Marlene, Vicki, Hans, Conchita, Enrique, Carla, Giorgio, Mizuki, Takumi, Celine, Lea oder Mathieu\n\nVerbesserungsvorschläge und Feedback gerne unter https://github.com/sgruendel/alexa-voices-tester/issues/new.",
+          "description": "Lass' Alexa mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden, Aufruf über\n\"Alexa, öffne Stimmentester und sprich als Italiener\"\n\nEs werden alle Nationalitäten unterstützt, für die Alexa Amazon Polly Stimmen anbietet: Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin\n\nVerbesserungsvorschläge und Feedback gerne unter https://github.com/sgruendel/alexa-voices-tester/issues/new.",
           "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/fa1a/858bd0beeb12426fa0e96bfc632f30a8/APP_ICON_LARGE?versionId=dva5DLGGtaWXwIjW5lLJ5JenwmGYhmIS&AWSAccessKeyId=AKIAJFEYRBGIHK2BBYKA&Expires=1541766839&Signature=1ABj6jr9Dobe251BIvUkH97rmqs%3D"
         }
       },

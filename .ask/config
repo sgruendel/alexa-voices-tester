@@ -5,16 +5,16 @@
       "was_cloned": false,
       "resources": {
         "manifest": {
-          "eTag": "3a427fab6edc53a1ec6dd19bd986b8a8"
+          "eTag": "acce7bd05c6443929e82fb65ab27d53d"
         },
         "interactionModel": {
           "de-DE": {
-            "eTag": "70def608e834dcc75395b15ff62490a3"
+            "eTag": "f396e857dc257cb3b647295a6361a3ec"
           }
         },
         "lambda": [
           {
-            "arn": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:2",
+            "arn": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:3",
             "awsRegion": "eu-west-1",
             "functionName": "voicesTester",
             "alexaUsage": [
@@ -29,7 +29,7 @@
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:2"
+                "uri": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:3"
               }
             }
           }

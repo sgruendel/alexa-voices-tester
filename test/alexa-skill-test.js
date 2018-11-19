@@ -4,7 +4,8 @@
 const alexaTest = require('alexa-skill-test-framework');
 
 // custom slot types
-const LIST_OF_VOICES = 'LIST_OF_VOICES';
+const LIST_OF_COUNTRIES_F = 'LIST_OF_COUNTRIES_F';
+const LIST_OF_COUNTRIES_M = 'LIST_OF_COUNTRIES_M';
 
 // initialize the testing framework
 alexaTest.initialize(
@@ -30,8 +31,8 @@ describe('Stimmentester Skill', () => {
         alexaTest.test([
             {
                 request: alexaTest.getIntentRequest('AMAZON.HelpIntent'),
-                says: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden. Welche Stimme soll ich benutzen?',
-                reprompts: 'Welche Stimme soll ich benutzen: Ivy, Joanna, Kendra, Kimberly, Salli, Joey, Justin, Matthew, Nicole, Russell, Amy, Emma, Brian, Aditi, Raveena, Marlene, Vicki, Hans, Conchita, Enrique, Carla, Giorgio, Mizuki, Takumi, Celine, Lea oder Mathieu?',
+                says: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden, z.B. als Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin. Welche Stimme soll ich benutzen?',
+                reprompts: 'Welche Nationalität soll ich benutzen: Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin?',
                 shouldEndSession: false,
             },
         ]);
@@ -70,26 +71,33 @@ describe('Stimmentester Skill', () => {
         alexaTest.test([
             {
                 request: alexaTest.getLaunchRequest(),
-                says: 'Welche Stimme soll ich benutzen?',
-                reprompts: 'Welche Stimme soll ich benutzen: Ivy, Joanna, Kendra, Kimberly, Salli, Joey, Justin, Matthew, Nicole, Russell, Amy, Emma, Brian, Aditi, Raveena, Marlene, Vicki, Hans, Conchita, Enrique, Carla, Giorgio, Mizuki, Takumi, Celine, Lea oder Mathieu?',
+                says: 'Als wer soll ich reden?',
+                reprompts: 'Welche Nationalität soll ich benutzen: Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin?',
                 shouldEndSession: false,
             },
         ]);
     });
 
-    describe('VoiceNameIntent', () => {
+    describe('CountryIntent', () => {
         alexaTest.test([
             {
                 request: alexaTest.addEntityResolutionToRequest(
-                    alexaTest.getIntentRequest('VoiceNameIntent', { voicename: 'Kendra' }),
-                    'voicename', LIST_OF_VOICES, 'Kendra'),
-                says: 'Hier ist die Stimme Kendra: <voice name="Kendra"><lang xml:lang="en-US">I speak English and my name is Kendra.</lang></voice>',
+                    alexaTest.getIntentRequest('CountryIntent', { country_m: 'deutscher' }),
+                    'country_m', LIST_OF_COUNTRIES_M, 'Deutscher', 'de-DE'),
+                says: 'So klingt ein Deutscher: <voice name="Hans"><lang xml:lang="de-DE">Ich spreche deutsch und mein Name ist Alex.</lang></voice>',
+                repromptsNothing: true, shouldEndSession: true,
+            },
+            {
+                request: alexaTest.addEntityResolutionToRequest(
+                    alexaTest.getIntentRequest('CountryIntent', { country_f: 'spanierin' }),
+                    'country_f', LIST_OF_COUNTRIES_F, 'Spanierin', 'es-ES'),
+                says: 'So klingt eine Spanierin: <voice name="Conchita"><lang xml:lang="es-ES">Hablo español y mi nombre es Alexa.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionNoMatchToRequest(
-                    alexaTest.getIntentRequest('VoiceNameIntent'), 'voicename', LIST_OF_VOICES, 'Otto'),
-                says: 'Ich kenne diese Stimme leider nicht.',
+                    alexaTest.getIntentRequest('CountryIntent'), 'country_f', LIST_OF_COUNTRIES_F, 'Klingone'),
+                says: 'Ich kenne diese Nationalität leider nicht.',
                 repromptsNothing: true, shouldEndSession: true,
             },
         ]);

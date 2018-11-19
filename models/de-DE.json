@@ -20,166 +20,148 @@
           "samples": []
         },
         {
-          "name": "VoiceNameIntent",
+          "name": "CountryIntent",
           "slots": [
             {
-              "name": "voicename",
-              "type": "LIST_OF_VOICES",
-              "samples": [
-                "{voicename}",
-                "als {voicename}",
-                "für {voicename}"
-              ]
+              "name": "country_f",
+              "type": "LIST_OF_COUNTRIES_F"
+            },
+            {
+              "name": "country_m",
+              "type": "LIST_OF_COUNTRIES_M"
             }
           ],
           "samples": [
-            "{voicename}",
-            "als {voicename}",
-            "für {voicename}",
-            "sprich als {voicename}",
-            "sprich wie {voicename}",
-            "rede als {voicename}",
-            "rede wie {voicename}"
+            "{country_f}",
+            "{country_m}",
+            "als {country_m}",
+            "als {country_f}",
+            "sprich als {country_m}",
+            "sprich als {country_f}",
+            "sprich wie ein {country_m}",
+            "sprich wie eine {country_f}",
+            "rede als {country_m}",
+            "rede als {country_f}",
+            "rede wie ein {country_m}",
+            "rede wie eine {country_f}"
           ]
         }
       ],
       "types": [
         {
-          "name": "LIST_OF_VOICES",
+          "name": "LIST_OF_COUNTRIES_F",
           "values": [
             {
+              "id": "en-US",
               "name": {
-                "value": "Joey"
+                "value": "Amerikanerin"
               }
             },
             {
+              "id": "en-AU",
               "name": {
-                "value": "Justin"
+                "value": "Australierin"
               }
             },
             {
+              "id": "en-GB",
               "name": {
-                "value": "Matthew"
+                "value": "Britin",
+                "synonyms": [
+                  "Engländerin"
+                ]
               }
             },
             {
+              "id": "en-IN",
               "name": {
-                "value": "Russell"
+                "value": "Inderin"
               }
             },
             {
+              "id": "de-DE",
               "name": {
-                "value": "Brian"
+                "value": "Deutsche"
               }
             },
             {
+              "id": "es-ES",
               "name": {
-                "value": "Hans"
+                "value": "Spanierin"
               }
             },
             {
+              "id": "it-IT",
               "name": {
-                "value": "Enrique"
+                "value": "Italienerin"
               }
             },
             {
+              "id": "ja-JP",
               "name": {
-                "value": "Giorgio"
+                "value": "Japanerin"
               }
             },
             {
+              "id": "fr-FR",
               "name": {
-                "value": "Takumi"
+                "value": "Französin"
+              }
+            }
+          ]
+        },
+        {
+          "name": "LIST_OF_COUNTRIES_M",
+          "values": [
+            {
+              "id": "en-US",
+              "name": {
+                "value": "Amerikaner"
               }
             },
             {
+              "id": "en-AU",
               "name": {
-                "value": "Mathieu"
+                "value": "Australier"
               }
             },
             {
+              "id": "en-GB",
               "name": {
-                "value": "Ivy"
+                "value": "Brite",
+                "synonyms": [
+                  "Engländer"
+                ]
               }
             },
             {
+              "id": "de-DE",
               "name": {
-                "value": "Joanna"
+                "value": "Deutscher"
               }
             },
             {
+              "id": "es-ES",
               "name": {
-                "value": "Kendra"
+                "value": "Spanier"
               }
             },
             {
+              "id": "it-IT",
               "name": {
-                "value": "Kimberly"
+                "value": "Italiener"
               }
             },
             {
+              "id": "ja-JP",
               "name": {
-                "value": "Salli"
+                "value": "Japaner"
               }
             },
             {
+              "id": "fr-FR",
               "name": {
-                "value": "Nicole"
-              }
-            },
-            {
-              "name": {
-                "value": "Amy"
-              }
-            },
-            {
-              "name": {
-                "value": "Emma"
-              }
-            },
-            {
-              "name": {
-                "value": "Aditi"
-              }
-            },
-            {
-              "name": {
-                "value": "Raveena"
-              }
-            },
-            {
-              "name": {
-                "value": "Marlene"
-              }
-            },
-            {
-              "name": {
-                "value": "Vicki"
-              }
-            },
-            {
-              "name": {
-                "value": "Conchita"
-              }
-            },
-            {
-              "name": {
-                "value": "Carla"
-              }
-            },
-            {
-              "name": {
-                "value": "Mizuki"
-              }
-            },
-            {
-              "name": {
-                "value": "Celine"
-              }
-            },
-            {
-              "name": {
-                "value": "Lea"
+                "value": "Franzose"
               }
             }
           ]
@@ -189,48 +171,27 @@
     "dialog": {
       "intents": [
         {
-          "name": "VoiceNameIntent",
+          "name": "CountryIntent",
           "confirmationRequired": false,
           "prompts": {},
           "slots": [
             {
-              "name": "voicename",
-              "type": "LIST_OF_VOICES",
+              "name": "country_m",
+              "type": "LIST_OF_COUNTRIES_M",
               "confirmationRequired": false,
-              "elicitationRequired": true,
-              "prompts": {
-                "elicitation": "Elicit.Slot.voicename"
-              },
-              "validations": [
-                {
-                  "type": "hasEntityResolutionMatch",
-                  "prompt": "Slot.Validation.voicename"
-                }
-              ]
+              "elicitationRequired": false,
+              "prompts": {}
+            },
+            {
+              "name": "country_f",
+              "type": "LIST_OF_COUNTRIES_F",
+              "confirmationRequired": false,
+              "elicitationRequired": false,
+              "prompts": {}
             }
           ]
         }
       ]
-    },
-    "prompts": [
-      {
-        "id": "Elicit.Slot.voicename",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "Welche Stimme?"
-          }
-        ]
-      },
-      {
-        "id": "Slot.Validation.voicename",
-        "variations": [
-          {
-            "type": "PlainText",
-            "value": "Ich kenne diese Stimme leider nicht. Welche Stimme soll ich verwenden?"
-          }
-        ]
-      }
-    ]
+    }
   }
 }

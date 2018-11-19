@@ -25,20 +25,42 @@ const ER_SUCCESS_NO_MATCH = 'ER_SUCCESS_NO_MATCH';
 const languageStrings = {
     de: {
         translation: {
-            HELP_MESSAGE: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden. Welche Stimme soll ich benutzen?',
-            HELP_REPROMPT: 'Welche Stimme soll ich benutzen: Ivy, Joanna, Kendra, Kimberly, Salli, Joey, Justin, Matthew, Nicole, Russell, Amy, Emma, Brian, Aditi, Raveena, Marlene, Vicki, Hans, Conchita, Enrique, Carla, Giorgio, Mizuki, Takumi, Celine, Lea oder Mathieu?',
+            HELP_MESSAGE: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden, z.B. als Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin. Welche Stimme soll ich benutzen?',
+            HELP_REPROMPT: 'Welche Nationalität soll ich benutzen: Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin?',
             STOP_MESSAGE: '<say-as interpret-as="interjection">bis dann</say-as>.',
-            UNKNOWN_VOICENAME: 'Ich kenne diese Stimme leider nicht.',
+            UNKNOWN_COUNTRY: 'Ich kenne diese Nationalität leider nicht.',
             NOT_UNDERSTOOD_MESSAGE: 'Entschuldigung, das verstehe ich nicht. Bitte wiederhole das?',
         },
     },
 };
 
-const VoiceNameIntentHandler = {
+function getCountryRPA(slot) {
+    const rpa = slot
+        && slot.resolutions
+        && slot.resolutions.resolutionsPerAuthority[0];
+    if (rpa) {
+        switch (rpa.status.code) {
+        case ER_SUCCESS_NO_MATCH:
+            break;
+
+        case ER_SUCCESS_MATCH:
+            if (rpa.values.length > 1) {
+                logger.error('multiple matches for ' + slot.value);
+            }
+            return rpa.values[0].value;
+
+        default:
+            logger.error('unexpected status code ' + rpa.status.code);
+        }
+    }
+    return undefined;
+}
+
+const CountryIntentHandler = {
     canHandle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
         return request.type === 'LaunchRequest'
-            || (request.type === 'IntentRequest' && request.intent.name === 'VoiceNameIntent');
+            || (request.type === 'IntentRequest' && request.intent.name === 'CountryIntent');
     },
     handle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
@@ -48,52 +70,27 @@ const VoiceNameIntentHandler = {
         const slots = request.intent && request.intent.slots;
         if (!slots) {
             return handlerInput.responseBuilder
-                .speak('Welche Stimme soll ich benutzen?')
+                .speak('Als wer soll ich reden?')
                 .reprompt(requestAttributes.t('HELP_REPROMPT'))
                 .getResponse();
         }
-        logger.debug('voicename slot', slots.voicename);
+        logger.debug('country slots f/m', slots.country_f, slots.country_m);
 
-        const rpa = slots.voicename
-            && slots.voicename.resolutions
-            && slots.voicename.resolutions.resolutionsPerAuthority[0];
-        switch (rpa.status.code) {
-        case ER_SUCCESS_NO_MATCH:
-            // should never happen, as Slot Validation will only allow matches
-            logger.error('no match for voicename ' + slots.voicename.value);
+        const country_f = getCountryRPA(slots.country_f);
+        const country_m = getCountryRPA(slots.country_m);
+
+        logger.info('country f/m value', country_f || country_m);
+        if (!country_f && !country_m) {
             return handlerInput.responseBuilder
-                .speak(requestAttributes.t('UNKNOWN_VOICENAME'))
+                .speak(requestAttributes.t('UNKNOWN_COUNTRY'))
                 .getResponse();
-
-        case ER_SUCCESS_MATCH:
-            if (rpa.values.length > 1) {
-                logger.info('multiple matches for ' + slots.voicename.value);
-                var prompt = 'Welche Stimme';
-                const size = rpa.values.length;
-
-                rpa.values.forEach((element, index) => {
-                    prompt += ((index === size - 1) ? ' oder ' : ', ') + element.value.name;
-                });
-
-                prompt += '?';
-                logger.info('eliciting voicename slot: ' + prompt);
-                return handlerInput.responseBuilder
-                    .speak(prompt)
-                    .reprompt(prompt)
-                    .addElicitSlotDirective(slots.voicename.name)
-                    .getResponse();
-            }
-            break;
-
-        default:
-            logger.error('unexpected status code ' + rpa.status.code);
+        } else if (country_f) {
+            return handlerInput.responseBuilder
+                .speak('So klingt eine ' + country_f.name + ': ' + utils.getFemaleSpeechOutputFor(country_f.id))
+                .getResponse();
         }
-
-        const value = rpa.values[0].value;
-        logger.info('voicename value', value);
-
         return handlerInput.responseBuilder
-            .speak('Hier ist die Stimme ' + value.name + ': ' + utils.getSpeechOutputFor(value.name))
+            .speak('So klingt ein ' + country_m.name + ': ' + utils.getMaleSpeechOutputFor(country_m.id))
             .getResponse();
     },
 };
@@ -187,7 +184,7 @@ const LocalizationInterceptor = {
 
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
-        VoiceNameIntentHandler,
+        CountryIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler)
