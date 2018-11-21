@@ -84,14 +84,14 @@ describe('Stimmentester Skill', () => {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_m: 'deutscher' }),
                     'country_m', LIST_OF_COUNTRIES_M, 'Deutscher', 'de-DE'),
-                says: 'So klingt ein Deutscher: <voice name="Hans"><lang xml:lang="de-DE">Ich spreche deutsch und mein Name ist Alex.</lang></voice>',
+                says: '<voice name="Hans"><lang xml:lang="de-DE">Ich spreche deutsch und mein Name ist Alexa.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_f: 'spanierin' }),
                     'country_f', LIST_OF_COUNTRIES_F, 'Spanierin', 'es-ES'),
-                says: 'So klingt eine Spanierin: <voice name="Conchita"><lang xml:lang="es-ES">Hablo español y mi nombre es Alexa.</lang></voice>',
+                says: '<voice name="Conchita"><lang xml:lang="es-ES">Hablo español y mi nombre es Alexa.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {

@@ -84,13 +84,11 @@ const CountryIntentHandler = {
             return handlerInput.responseBuilder
                 .speak(requestAttributes.t('UNKNOWN_COUNTRY'))
                 .getResponse();
-        } else if (country_f) {
-            return handlerInput.responseBuilder
-                .speak('So klingt eine ' + country_f.name + ': ' + utils.getFemaleSpeechOutputFor(country_f.id))
-                .getResponse();
         }
         return handlerInput.responseBuilder
-            .speak('So klingt ein ' + country_m.name + ': ' + utils.getMaleSpeechOutputFor(country_m.id))
+            .speak(country_f
+                ? utils.getFemaleSpeechOutputFor(country_f.id)
+                : utils.getMaleSpeechOutputFor(country_m.id))
             .getResponse();
     },
 };
