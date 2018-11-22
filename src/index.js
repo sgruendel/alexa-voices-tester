@@ -59,8 +59,7 @@ function getCountryRPA(slot) {
 const CountryIntentHandler = {
     canHandle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
-        return request.type === 'LaunchRequest'
-            || (request.type === 'IntentRequest' && request.intent.name === 'CountryIntent');
+        return request.type === 'IntentRequest' && request.intent.name === 'CountryIntent';
     },
     handle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
@@ -96,7 +95,8 @@ const CountryIntentHandler = {
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;
-        return request.type === 'IntentRequest' && request.intent.name === 'AMAZON.HelpIntent';
+        return request.type === 'LaunchRequest'
+            || (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.HelpIntent');
     },
     handle(handlerInput) {
         const { request } = handlerInput.requestEnvelope;

@@ -71,7 +71,7 @@ describe('Stimmentester Skill', () => {
         alexaTest.test([
             {
                 request: alexaTest.getLaunchRequest(),
-                says: 'Als wer soll ich reden?',
+                says: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden, z.B. als Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin. Welche Stimme soll ich benutzen?',
                 reprompts: 'Welche Nationalität soll ich benutzen: Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin?',
                 shouldEndSession: false,
             },
@@ -82,9 +82,9 @@ describe('Stimmentester Skill', () => {
         alexaTest.test([
             {
                 request: alexaTest.addEntityResolutionToRequest(
-                    alexaTest.getIntentRequest('CountryIntent', { country_m: 'deutscher' }),
-                    'country_m', LIST_OF_COUNTRIES_M, 'Deutscher', 'de-DE'),
-                says: '<voice name="Hans"><lang xml:lang="de-DE">Ich spreche deutsch und mein Name ist Alexa.</lang></voice>',
+                    alexaTest.getIntentRequest('CountryIntent', { country_f: 'australierin' }),
+                    'country_f', LIST_OF_COUNTRIES_F, 'Australierin', 'en-AU'),
+                says: '<voice name="Nicole"><lang xml:lang="en-AU">I speak English and my name is Alexa.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
@@ -92,6 +92,48 @@ describe('Stimmentester Skill', () => {
                     alexaTest.getIntentRequest('CountryIntent', { country_f: 'spanierin' }),
                     'country_f', LIST_OF_COUNTRIES_F, 'Spanierin', 'es-ES'),
                 says: '<voice name="Conchita"><lang xml:lang="es-ES">Hablo español y mi nombre es Alexa.</lang></voice>',
+                repromptsNothing: true, shouldEndSession: true,
+            },
+            {
+                request: alexaTest.addEntityResolutionToRequest(
+                    alexaTest.getIntentRequest('CountryIntent', { country_f: 'italienerin' }),
+                    'country_f', LIST_OF_COUNTRIES_F, 'Italienerin', 'it-IT'),
+                says: '<voice name="Carla"><lang xml:lang="it-IT">Parlo italiano e mi chiamo Alexa.</lang></voice>',
+                repromptsNothing: true, shouldEndSession: true,
+            },
+            {
+                request: alexaTest.addEntityResolutionToRequest(
+                    alexaTest.getIntentRequest('CountryIntent', { country_f: 'japanerin' }),
+                    'country_f', LIST_OF_COUNTRIES_F, 'Japanerin', 'ja-JP'),
+                says: '<voice name="Mizuki"><lang xml:lang="ja-JP">私は日本語を話し、私の名前は Alexa.</lang></voice>',
+                repromptsNothing: true, shouldEndSession: true,
+            },
+            {
+                request: alexaTest.addEntityResolutionToRequest(
+                    alexaTest.getIntentRequest('CountryIntent', { country_m: 'australier' }),
+                    'country_m', LIST_OF_COUNTRIES_M, 'Australier', 'en-AU'),
+                says: '<voice name="Russell"><lang xml:lang="en-AU">I speak English and my name is Alexa.</lang></voice>',
+                repromptsNothing: true, shouldEndSession: true,
+            },
+            {
+                request: alexaTest.addEntityResolutionToRequest(
+                    alexaTest.getIntentRequest('CountryIntent', { country_m: 'brite' }),
+                    'country_m', LIST_OF_COUNTRIES_M, 'Brite', 'en-GB'),
+                says: '<voice name="Brian"><lang xml:lang="en-GB">I speak English and my name is Alexa.</lang></voice>',
+                repromptsNothing: true, shouldEndSession: true,
+            },
+            {
+                request: alexaTest.addEntityResolutionToRequest(
+                    alexaTest.getIntentRequest('CountryIntent', { country_m: 'deutscher' }),
+                    'country_m', LIST_OF_COUNTRIES_M, 'Deutscher', 'de-DE'),
+                says: '<voice name="Hans"><lang xml:lang="de-DE">Ich spreche deutsch und mein Name ist Alexa.</lang></voice>',
+                repromptsNothing: true, shouldEndSession: true,
+            },
+            {
+                request: alexaTest.addEntityResolutionToRequest(
+                    alexaTest.getIntentRequest('CountryIntent', { country_m: 'frankreich' }),
+                    'country_m', LIST_OF_COUNTRIES_M, 'Frankreich', 'fr-FR'),
+                says: '<voice name="Mathieu"><lang xml:lang="fr-FR">Je parle français et je m\'appelle Alexa.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
