@@ -101,12 +101,6 @@
               "name": {
                 "value": "Japanerin"
               }
-            },
-            {
-              "id": "fr-FR",
-              "name": {
-                "value": "Französin"
-              }
             }
           ]
         },
@@ -144,12 +138,6 @@
               "id": "es-ES",
               "name": {
                 "value": "Spanier"
-              }
-            },
-            {
-              "id": "it-IT",
-              "name": {
-                "value": "Italiener"
               }
             },
             {
