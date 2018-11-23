@@ -178,15 +178,15 @@
             {
               "name": "country_m",
               "type": "LIST_OF_COUNTRIES_M",
-              "confirmationRequired": false,
               "elicitationRequired": false,
+              "confirmationRequired": false,
               "prompts": {}
             },
             {
               "name": "country_f",
               "type": "LIST_OF_COUNTRIES_F",
-              "confirmationRequired": false,
               "elicitationRequired": false,
+              "confirmationRequired": false,
               "prompts": {}
             }
           ]
