@@ -5,22 +5,40 @@
       "was_cloned": false,
       "resources": {
         "manifest": {
-          "eTag": "3610ea548c86111db65848c408388422"
+          "eTag": "23293c28f76f482a4e3d0c67e3e29e53"
         },
         "interactionModel": {
           "de-DE": {
-            "eTag": "2b200b17fd031ad62a7d03926bb588d4"
+            "eTag": "f396e857dc257cb3b647295a6361a3ec"
+          },
+          "en-US": {
+            "eTag": "c117121873b03eb9006b24ae056daf92"
+          },
+          "en-IN": {
+            "eTag": "c117121873b03eb9006b24ae056daf92"
+          },
+          "en-AU": {
+            "eTag": "c117121873b03eb9006b24ae056daf92"
+          },
+          "en-GB": {
+            "eTag": "c117121873b03eb9006b24ae056daf92"
+          },
+          "fr-FR": {
+            "eTag": "83a972b7016b3646e4b05a231d9924d1"
+          },
+          "it-IT": {
+            "eTag": "e53963dbd3cf6a6aae69567f1932d5ac"
           }
         },
         "lambda": [
           {
-            "arn": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:7",
+            "arn": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester",
             "awsRegion": "eu-west-1",
             "functionName": "voicesTester",
             "alexaUsage": [
               "custom/default"
             ],
-            "revisionId": "739382f7-260f-4447-9c42-d7a62457b096"
+            "revisionId": "db2abca6-d6a9-4792-8731-41a133de97ed"
           }
         ]
       },
@@ -29,7 +47,7 @@
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:7"
+                "uri": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester"
               }
             }
           }

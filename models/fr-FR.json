@@ -1,0 +1,234 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "testeur de vote",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "CountryIntent",
+          "slots": [
+            {
+              "name": "country_f",
+              "type": "LIST_OF_COUNTRIES_F"
+            },
+            {
+              "name": "country_m",
+              "type": "LIST_OF_COUNTRIES_M"
+            }
+          ],
+          "samples": [
+            "{country_f}",
+            "{country_m}",
+            "comme un {country_m}",
+            "comme une {country_f}",
+            "parler comme un {country_m}",
+            "parler comme une {country_f}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "LIST_OF_COUNTRIES_F",
+          "values": [
+            {
+              "id": "en-US",
+              "name": {
+                "value": "femme américaine",
+                "synonyms": [
+                  "fille américaine",
+                  "femme d'Amérique",
+                  "fille d'Amérique"
+                ]
+              }
+            },
+            {
+              "id": "en-AU",
+              "name": {
+                "value": "femme australienne",
+                "synonyms": [
+                  "fille australienne",
+                  "femme de l'Australie",
+                  "fille de l'Australie"
+                ]
+              }
+            },
+            {
+              "id": "en-GB",
+              "name": {
+                "value": "femme britannique",
+                "synonyms": [
+                  "fille britannique",
+                  "femme anglaise",
+                  "fille anglaise",
+                  "femme du Royaume-Uni",
+                  "fille du Royaume-Uni",
+                  "femme d'Angleterre",
+                  "fille d'Angleterre"
+                ]
+              }
+            },
+            {
+              "id": "en-IN",
+              "name": {
+                "value": "femme indienne",
+                "synonyms": [
+                  "fille indienne",
+                  "femme de l'Inde",
+                  "fille de l'Inde"
+                ]
+              }
+            },
+            {
+              "id": "de-DE",
+              "name": {
+                "value": "femme allemande",
+                "synonyms": [
+                  "fille allemande",
+                  "femme de l'Allemagne",
+                  "fille de l'Allemagne"
+                ]
+              }
+            },
+            {
+              "id": "fr-FR",
+              "name": {
+                "value": "femme française",
+                "synonyms": [
+                  "fille française",
+                  "femme de france",
+                  "fille de france"
+                ]
+              }
+            },
+            {
+              "id": "it-IT",
+              "name": {
+                "value": "femme italienne",
+                "synonyms": [
+                  "fille italienne",
+                  "femme d'Italie",
+                  "fille d'Italie"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "LIST_OF_COUNTRIES_M",
+          "values": [
+            {
+              "id": "en-US",
+              "name": {
+                "value": "homme américain",
+                "synonyms": [
+                  "gars américain",
+                  "homme d'Amérique",
+                  "gars d'Amérique"
+                ]
+              }
+            },
+            {
+              "id": "en-AU",
+              "name": {
+                "value": "homme australien",
+                "synonyms": [
+                  "gars australien",
+                  "homme de l'Australie",
+                  "gars de l'Australie"
+                ]
+              }
+            },
+            {
+              "id": "en-GB",
+              "name": {
+                "value": "homme britannique",
+                "synonyms": [
+                  "gars britannique",
+                  "homme anglais",
+                  "gars anglais",
+                  "homme du Royaume-Uni",
+                  "gars du Royaume-Uni",
+                  "homme d'Angleterre",
+                  "gars d'Angleterre"
+                ]
+              }
+            },
+            {
+              "id": "de-DE",
+              "name": {
+                "value": "homme allemand",
+                "synonyms": [
+                  "gars allemand",
+                  "homme de l'Allemagne",
+                  "gars de l'Allemagne"
+                ]
+              }
+            },
+            {
+              "id": "fr-FR",
+              "name": {
+                "value": "homme français",
+                "synonyms": [
+                  "gars français",
+                  "homme de france",
+                  "gars de france"
+                ]
+              }
+            },
+            {
+              "id": "it-IT",
+              "name": {
+                "value": "homme italien",
+                "synonyms": [
+                  "gars italien",
+                  "homme d'Italie",
+                  "gars d'Italie"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "CountryIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "country_m",
+              "type": "LIST_OF_COUNTRIES_M",
+              "confirmationRequired": false,
+              "elicitationRequired": false,
+              "prompts": {}
+            },
+            {
+              "name": "country_f",
+              "type": "LIST_OF_COUNTRIES_F",
+              "confirmationRequired": false,
+              "elicitationRequired": false,
+              "prompts": {}
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

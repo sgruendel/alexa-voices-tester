@@ -28,6 +28,45 @@ const languageStrings = {
             HELP_MESSAGE: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden, z.B. als Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin. Welche Stimme soll ich benutzen?',
             HELP_REPROMPT: 'Welche Nationalität soll ich benutzen: Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Spanier oder Spanierin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin?',
             STOP_MESSAGE: '<say-as interpret-as="interjection">bis dann</say-as>.',
+            NATIONALITY_FEMALE: 'So klingt es wenn ich rede wie eine ',
+            NATIONALITY_MALE: 'So klingt es wenn ich rede wie ein ',
+            WHICH_NATIONALITY: 'Als wer soll ich reden?',
+            UNKNOWN_COUNTRY: 'Ich kenne diese Nationalität leider nicht.',
+            NOT_UNDERSTOOD_MESSAGE: 'Entschuldigung, das verstehe ich nicht. Bitte wiederhole das?',
+        },
+    },
+    en: {
+        translation: {
+            HELP_MESSAGE: 'I can talk with various female and male voices in different languages, e.g. as German man/woman, American man/woman, Australian man/woman, British man/woman, Indian woman, Italian man/woman, French man/woman. Which voice should I use?',
+            HELP_REPROMPT: 'Which voice should I use: German man/woman, American man/woman, Australian man/woman, British man/woman, Indian woman, Italian man/woman, French man/woman?',
+            STOP_MESSAGE: 'See you soon!',
+            NATIONALITY_FEMALE: "Here's what I sound like as a ",
+            NATIONALITY_MALE: "Here's what I sound like as a ",
+            WHICH_NATIONALITY: 'Which voice should I use?',
+            UNKNOWN_COUNTRY: "I don't know this voice.",
+            NOT_UNDERSTOOD_MESSAGE: 'Sorry, I don\'t understand. Please say again?',
+        },
+    },
+    fr: {
+        translation: {
+            HELP_MESSAGE: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden, z.B. als Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Italiener oder Italienerin, Franzose oder Französin. Welche Stimme soll ich benutzen?',
+            HELP_REPROMPT: 'Welche Nationalität soll ich benutzen: Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin?',
+            STOP_MESSAGE: '<say-as interpret-as="interjection">bis dann</say-as>.',
+            NATIONALITY_FEMALE: "Here's what I sound like as a ",
+            NATIONALITY_MALE: "Here's what I sound like as a ",
+            WHICH_NATIONALITY: 'Als wer soll ich reden?',
+            UNKNOWN_COUNTRY: 'Ich kenne diese Nationalität leider nicht.',
+            NOT_UNDERSTOOD_MESSAGE: 'Entschuldigung, das verstehe ich nicht. Bitte wiederhole das?',
+        },
+    },
+    it: {
+        translation: {
+            HELP_MESSAGE: 'Ich kann mit verschiedenen weiblichen und männlichen Stimmen in unterschiedlichen Sprachen reden, z.B. als Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Italiener oder Italienerin, Franzose oder Französin. Welche Stimme soll ich benutzen?',
+            HELP_REPROMPT: 'Welche Nationalität soll ich benutzen: Deutscher oder Deutsche, Amerikaner oder Amerikanerin, Australier oder Australierin, Brite oder Britin, Inderin, Italiener oder Italienerin, Japaner oder Japanerin, Franzose oder Französin?',
+            STOP_MESSAGE: '<say-as interpret-as="interjection">bis dann</say-as>.',
+            NATIONALITY_FEMALE: "Here's what I sound like as a ",
+            NATIONALITY_MALE: "Here's what I sound like as a ",
+            WHICH_NATIONALITY: 'Als wer soll ich reden?',
             UNKNOWN_COUNTRY: 'Ich kenne diese Nationalität leider nicht.',
             NOT_UNDERSTOOD_MESSAGE: 'Entschuldigung, das verstehe ich nicht. Bitte wiederhole das?',
         },
@@ -69,7 +108,7 @@ const CountryIntentHandler = {
         const slots = request.intent && request.intent.slots;
         if (!slots) {
             return handlerInput.responseBuilder
-                .speak('Als wer soll ich reden?')
+                .speak(requestAttributes.t('WHICH_NATIONALITY'))
                 .reprompt(requestAttributes.t('HELP_REPROMPT'))
                 .getResponse();
         }
@@ -83,11 +122,13 @@ const CountryIntentHandler = {
             return handlerInput.responseBuilder
                 .speak(requestAttributes.t('UNKNOWN_COUNTRY'))
                 .getResponse();
+        } else if (country_f) {
+            return handlerInput.responseBuilder
+                .speak(utils.getFemaleSpeechOutputFor(requestAttributes.t('NATIONALITY_FEMALE') + country_f.name, country_f.id))
+                .getResponse();
         }
         return handlerInput.responseBuilder
-            .speak(country_f
-                ? utils.getFemaleSpeechOutputFor(country_f.id)
-                : utils.getMaleSpeechOutputFor(country_m.id))
+            .speak(utils.getMaleSpeechOutputFor(requestAttributes.t('NATIONALITY_MALE') + country_m.name, country_m.id))
             .getResponse();
     },
 };

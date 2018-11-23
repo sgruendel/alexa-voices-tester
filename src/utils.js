@@ -74,7 +74,7 @@ const maleVoiceNames = {
 
 var exports = module.exports = {};
 
-function getSpeechOutputFor(lang, voiceNames) {
+function getSpeechOutputFor(nationality, lang, voiceNames) {
     if (voiceNames[lang]) {
         const voiceName = voiceNames[lang][Math.floor(Math.random() * voiceNames[lang].length)];
         var iAm;
@@ -94,15 +94,15 @@ function getSpeechOutputFor(lang, voiceNames) {
             logger.error('unsupported language ' + lang);
             iAm = '<lang xml:lang="en-US">I try to speak English and my name is</lang>';
         }
-        return '<voice name="' + voiceName + '"><lang xml:lang="' + lang + '">' + iAm + ' Alexa.</lang></voice>';
+        return '<voice name="' + voiceName + '">' + nationality + ': <lang xml:lang="' + lang + '">' + iAm + ' Alexa.</lang></voice>';
     }
     logger.error('lang not found: ' + lang);
 };
 
-exports.getFemaleSpeechOutputFor = (lang) => {
-    return getSpeechOutputFor(lang, femaleVoiceNames);
+exports.getFemaleSpeechOutputFor = (nationality, lang) => {
+    return getSpeechOutputFor(nationality, lang, femaleVoiceNames);
 };
 
-exports.getMaleSpeechOutputFor = (lang) => {
-    return getSpeechOutputFor(lang, maleVoiceNames);
+exports.getMaleSpeechOutputFor = (nationality, lang) => {
+    return getSpeechOutputFor(nationality, lang, maleVoiceNames);
 };

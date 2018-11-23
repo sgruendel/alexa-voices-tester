@@ -1,0 +1,234 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "voto tester",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "CountryIntent",
+          "slots": [
+            {
+              "name": "country_f",
+              "type": "LIST_OF_COUNTRIES_F"
+            },
+            {
+              "name": "country_m",
+              "type": "LIST_OF_COUNTRIES_M"
+            }
+          ],
+          "samples": [
+            "{country_f}",
+            "{country_m}",
+            "come un {country_m}",
+            "come una {country_f}",
+            "parla come un {country_m}",
+            "parla come una {country_f}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "LIST_OF_COUNTRIES_F",
+          "values": [
+            {
+              "id": "en-US",
+              "name": {
+                "value": "donna americana",
+                "synonyms": [
+                  "ragazza americana",
+                  "donna dall'America",
+                  "ragazza dall'America"
+                ]
+              }
+            },
+            {
+              "id": "en-AU",
+              "name": {
+                "value": "donna australiana",
+                "synonyms": [
+                  "ragazza australiana",
+                  "donna dall'Australia",
+                  "ragazza dall'Australia"
+                ]
+              }
+            },
+            {
+              "id": "en-GB",
+              "name": {
+                "value": "donna britannica",
+                "synonyms": [
+                  "ragazza britannica",
+                  "donna inglese",
+                  "ragazza inglese",
+                  "donna dal Regno Unito",
+                  "ragazza dal Regno Unito",
+                  "donna dall'Inghilterra",
+                  "ragazza dall'Inghilterra"
+                ]
+              }
+            },
+            {
+              "id": "en-IN",
+              "name": {
+                "value": "donna indiana",
+                "synonyms": [
+                  "ragazza indiana",
+                  "donna dall'India",
+                  "ragazza dall'India"
+                ]
+              }
+            },
+            {
+              "id": "de-DE",
+              "name": {
+                "value": "donna tedesca",
+                "synonyms": [
+                  "ragazza tedesca",
+                  "donna dalla Germania",
+                  "ragazza dalla Germania"
+                ]
+              }
+            },
+            {
+              "id": "fr-FR",
+              "name": {
+                "value": "donna francese",
+                "synonyms": [
+                  "ragazza francese",
+                  "donna dalla Francia",
+                  "ragazza dalla Francia"
+                ]
+              }
+            },
+            {
+              "id": "it-IT",
+              "name": {
+                "value": "donna italiana",
+                "synonyms": [
+                  "ragazza italiana",
+                  "donna dall'Italia",
+                  "ragazza dall'Italia"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "LIST_OF_COUNTRIES_M",
+          "values": [
+            {
+              "id": "en-US",
+              "name": {
+                "value": "uomo americano",
+                "synonyms": [
+                  "ragazzo americano",
+                  "uomo dall'America",
+                  "ragazzo dall'America"
+                ]
+              }
+            },
+            {
+              "id": "en-AU",
+              "name": {
+                "value": "uomo australiano",
+                "synonyms": [
+                  "ragazzo australiano",
+                  "uomo dall'Australia",
+                  "ragazzo dall'Australia"
+                ]
+              }
+            },
+            {
+              "id": "en-GB",
+              "name": {
+                "value": "uomo britannico",
+                "synonyms": [
+                  "ragazzo britannico",
+                  "uomo inglese",
+                  "ragazzo inglese",
+                  "uomo dal Regno Unito",
+                  "ragazzo dal Regno Unito",
+                  "uomo dall'Inghilterra",
+                  "ragazzo dall'Inghilterra"
+                ]
+              }
+            },
+            {
+              "id": "de-DE",
+              "name": {
+                "value": "uomo tedesco",
+                "synonyms": [
+                  "ragazzo tedesco",
+                  "uomo dalla Germania",
+                  "ragazzo dalla Germania"
+                ]
+              }
+            },
+            {
+              "id": "fr-FR",
+              "name": {
+                "value": "uomo francese",
+                "synonyms": [
+                  "ragazzo francese",
+                  "uomo dalla Francia",
+                  "ragazzo dalla Francia"
+                ]
+              }
+            },
+            {
+              "id": "it-IT",
+              "name": {
+                "value": "uomo italiano",
+                "synonyms": [
+                  "ragazzo italiano",
+                  "uomo dall'Italia",
+                  "ragazzo dall'Italia"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "CountryIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "country_m",
+              "type": "LIST_OF_COUNTRIES_M",
+              "confirmationRequired": false,
+              "elicitationRequired": false,
+              "prompts": {}
+            },
+            {
+              "name": "country_f",
+              "type": "LIST_OF_COUNTRIES_F",
+              "confirmationRequired": false,
+              "elicitationRequired": false,
+              "prompts": {}
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
