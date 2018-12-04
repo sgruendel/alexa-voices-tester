@@ -77,24 +77,24 @@ var exports = module.exports = {};
 function getSpeechOutputFor(nationality, lang, voiceNames) {
     if (voiceNames[lang]) {
         const voiceName = voiceNames[lang][Math.floor(Math.random() * voiceNames[lang].length)];
-        var iAm;
+        var hello;
         if (lang.startsWith('de')) {
-            iAm = 'Ich spreche deutsch und mein Name ist';
+            hello = 'Hallo, so klingt die deutsche Sprache';
         } else if (lang.startsWith('en')) {
-            iAm = 'I speak English and my name is';
+            hello = 'Hi there, this is what the English language sounds like';
         } else if (lang.startsWith('es')) {
-            iAm = 'Hablo español y mi nombre es';
+            hello = 'Hola, ese es el idioma español';
         } else if (lang.startsWith('it')) {
-            iAm = 'Parlo italiano e mi chiamo';
+            hello = 'Ciao, questa è la lingua italiana';
         } else if (lang.startsWith('ja')) {
-            iAm = '私は日本語を話し、私の名前は';
+            hello = 'こんにちは、それは日本語のように聞こえる';
         } else if (lang.startsWith('fr')) {
-            iAm = "Je parle français et je m'appelle";
+            hello = 'Bonjour, ça sonne comme la langue française';
         } else {
             logger.error('unsupported language ' + lang);
-            iAm = '<lang xml:lang="en-US">I try to speak English and my name is</lang>';
+            hello = '<lang xml:lang="en-US">I try to speak English and my name is</lang>';
         }
-        return '<voice name="' + voiceName + '">' + nationality + ': <lang xml:lang="' + lang + '">' + iAm + ' Alexa.</lang></voice>';
+        return '<voice name="' + voiceName + '">' + nationality + ': <lang xml:lang="' + lang + '">' + hello + '.</lang></voice>';
     }
     logger.error('lang not found: ' + lang);
 };

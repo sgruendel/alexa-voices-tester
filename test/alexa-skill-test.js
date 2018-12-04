@@ -84,77 +84,77 @@ describe('Stimmentester Skill', () => {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_f: 'australierin' }),
                     'country_f', LIST_OF_COUNTRIES_F, 'Australierin', 'en-AU'),
-                says: '<voice name="Nicole">So klingt es wenn ich rede wie eine Australierin: <lang xml:lang="en-AU">I speak English and my name is Alexa.</lang></voice>',
+                says: '<voice name="Nicole">So klingt es wenn eine Australierin spricht: <lang xml:lang="en-AU">Hi there, this is what the English language sounds like.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_f: 'spanierin' }),
                     'country_f', LIST_OF_COUNTRIES_F, 'Spanierin', 'es-ES'),
-                says: '<voice name="Conchita">So klingt es wenn ich rede wie eine Spanierin: <lang xml:lang="es-ES">Hablo español y mi nombre es Alexa.</lang></voice>',
+                says: '<voice name="Conchita">So klingt es wenn eine Spanierin spricht: <lang xml:lang="es-ES">Hola, ese es el idioma español.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_f: 'italienerin' }),
                     'country_f', LIST_OF_COUNTRIES_F, 'Italienerin', 'it-IT'),
-                says: '<voice name="Carla">So klingt es wenn ich rede wie eine Italienerin: <lang xml:lang="it-IT">Parlo italiano e mi chiamo Alexa.</lang></voice>',
+                says: '<voice name="Carla">So klingt es wenn eine Italienerin spricht: <lang xml:lang="it-IT">Ciao, questa è la lingua italiana.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_f: 'japanerin' }),
                     'country_f', LIST_OF_COUNTRIES_F, 'Japanerin', 'ja-JP'),
-                says: '<voice name="Mizuki">So klingt es wenn ich rede wie eine Japanerin: <lang xml:lang="ja-JP">私は日本語を話し、私の名前は Alexa.</lang></voice>',
+                says: '<voice name="Mizuki">So klingt es wenn eine Japanerin spricht: <lang xml:lang="ja-JP">こんにちは、それは日本語のように聞こえる.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_m: 'australier' }),
                     'country_m', LIST_OF_COUNTRIES_M, 'Australier', 'en-AU'),
-                says: '<voice name="Russell">So klingt es wenn ich rede wie ein Australier: <lang xml:lang="en-AU">I speak English and my name is Alexa.</lang></voice>',
+                says: '<voice name="Russell">So klingt es wenn ein Australier spricht: <lang xml:lang="en-AU">Hi there, this is what the English language sounds like.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_m: 'brite' }),
                     'country_m', LIST_OF_COUNTRIES_M, 'Brite', 'en-GB'),
-                says: '<voice name="Brian">So klingt es wenn ich rede wie ein Brite: <lang xml:lang="en-GB">I speak English and my name is Alexa.</lang></voice>',
+                says: '<voice name="Brian">So klingt es wenn ein Brite spricht: <lang xml:lang="en-GB">Hi there, this is what the English language sounds like.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_m: 'deutscher' }),
                     'country_m', LIST_OF_COUNTRIES_M, 'Deutscher', 'de-DE'),
-                says: '<voice name="Hans">So klingt es wenn ich rede wie ein Deutscher: <lang xml:lang="de-DE">Ich spreche deutsch und mein Name ist Alexa.</lang></voice>',
+                says: '<voice name="Hans">So klingt es wenn ein Deutscher spricht: <lang xml:lang="de-DE">Hallo, so klingt die deutsche Sprache.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_m: 'spanier' }),
                     'country_m', LIST_OF_COUNTRIES_M, 'Spanier', 'es-ES'),
-                says: '<voice name="Enrique">So klingt es wenn ich rede wie ein Spanier: <lang xml:lang="es-ES">Hablo español y mi nombre es Alexa.</lang></voice>',
+                says: '<voice name="Enrique">So klingt es wenn ein Spanier spricht: <lang xml:lang="es-ES">Hola, ese es el idioma español.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_m: 'italiener' }),
                     'country_m', LIST_OF_COUNTRIES_M, 'Italiener', 'it-IT'),
-                says: '<voice name="Giorgio">So klingt es wenn ich rede wie ein Italiener: <lang xml:lang="it-IT">Parlo italiano e mi chiamo Alexa.</lang></voice>',
+                says: '<voice name="Giorgio">So klingt es wenn ein Italiener spricht: <lang xml:lang="it-IT">Ciao, questa è la lingua italiana.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_m: 'japaner' }),
                     'country_m', LIST_OF_COUNTRIES_M, 'Japaner', 'ja-JP'),
-                says: '<voice name="Takumi">So klingt es wenn ich rede wie ein Japaner: <lang xml:lang="ja-JP">私は日本語を話し、私の名前は Alexa.</lang></voice>',
+                says: '<voice name="Takumi">So klingt es wenn ein Japaner spricht: <lang xml:lang="ja-JP">こんにちは、それは日本語のように聞こえる.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
                 request: alexaTest.addEntityResolutionToRequest(
                     alexaTest.getIntentRequest('CountryIntent', { country_m: 'franzose' }),
                     'country_m', LIST_OF_COUNTRIES_M, 'Franzose', 'fr-FR'),
-                says: '<voice name="Mathieu">So klingt es wenn ich rede wie ein Franzose: <lang xml:lang="fr-FR">Je parle français et je m\'appelle Alexa.</lang></voice>',
+                says: '<voice name="Mathieu">So klingt es wenn ein Franzose spricht: <lang xml:lang="fr-FR">Bonjour, ça sonne comme la langue française.</lang></voice>',
                 repromptsNothing: true, shouldEndSession: true,
             },
             {
