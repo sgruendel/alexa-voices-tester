@@ -79,22 +79,22 @@ function getSpeechOutputFor(nationality, lang, voiceNames) {
         const voiceName = voiceNames[lang][Math.floor(Math.random() * voiceNames[lang].length)];
         var hello;
         if (lang.startsWith('de')) {
-            hello = 'Hallo, so klingt die deutsche Sprache';
+            hello = 'Hallo, so klingt die deutsche Sprache.';
         } else if (lang.startsWith('en')) {
-            hello = 'Hi there, this is what the English language sounds like';
+            hello = 'Hi there, this is what the English language sounds like.';
         } else if (lang.startsWith('es')) {
-            hello = 'Hola, ese es el idioma español';
+            hello = 'Hola, ese es el idioma español.';
         } else if (lang.startsWith('it')) {
-            hello = 'Ciao, questa è la lingua italiana';
+            hello = 'Ciao, questa è la lingua italiana.';
         } else if (lang.startsWith('ja')) {
-            hello = 'こんにちは、それは日本語のように聞こえる';
+            hello = 'こんにちは、それは日本語のように聞こえる.';
         } else if (lang.startsWith('fr')) {
-            hello = 'Bonjour, ça sonne comme la langue française';
+            hello = 'Bonjour, ça sonne comme la langue française.';
         } else {
             logger.error('unsupported language ' + lang);
-            hello = '<lang xml:lang="en-US">I try to speak English and my name is</lang>';
+            hello = '???';
         }
-        return '<voice name="' + voiceName + '">' + nationality + ': <lang xml:lang="' + lang + '">' + hello + '.</lang></voice>';
+        return '<voice name="' + voiceName + '">' + nationality + ': <lang xml:lang="' + lang + '">' + hello + '</lang></voice>';
     }
     logger.error('lang not found: ' + lang);
 };
