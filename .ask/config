@@ -5,7 +5,7 @@
       "was_cloned": false,
       "resources": {
         "manifest": {
-          "eTag": "1a3bb0d9b36df9975ce75148ded1099f"
+          "eTag": "c0b2aefa6af20eb34555f2be0a0669d1"
         },
         "interactionModel": {
           "de-DE": {
@@ -14,7 +14,7 @@
         },
         "lambda": [
           {
-            "arn": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:10",
+            "arn": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:11",
             "awsRegion": "eu-west-1",
             "functionName": "voicesTester",
             "alexaUsage": [
@@ -29,7 +29,7 @@
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:10"
+                "uri": "arn:aws:lambda:eu-west-1:467353799488:function:voicesTester:11"
               }
             }
           }
