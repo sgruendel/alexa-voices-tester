@@ -1,7 +1,7 @@
 'use strict';
 
 const Alexa = require('ask-sdk-core');
-const i18n = require('i18next');
+const i18next = require('i18next');
 const sprintf = require('i18next-sprintf-postprocessor');
 const dashbot = process.env.DASHBOT_API_KEY ? require('dashbot')(process.env.DASHBOT_API_KEY).alexa : undefined;
 const winston = require('winston');
@@ -72,6 +72,11 @@ const languageStrings = {
         },
     },
 };
+i18next.use(sprintf).init({
+    overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
+    resources: languageStrings,
+    returnObjects: true,
+});
 
 function getCountryRPA(slot) {
     const rpa = slot
@@ -207,16 +212,11 @@ const ErrorHandler = {
 
 const LocalizationInterceptor = {
     process(handlerInput) {
-        const localizationClient = i18n.use(sprintf).init({
-            lng: handlerInput.requestEnvelope.request.locale,
-            overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-            resources: languageStrings,
-            returnObjects: true,
-        });
+        i18next.changeLanguage(Alexa.getLocale(handlerInput.requestEnvelope));
 
         const attributes = handlerInput.attributesManager.getRequestAttributes();
         attributes.t = (...args) => {
-            return localizationClient.t(...args);
+            return i18next.t(...args);
         };
     },
 };
